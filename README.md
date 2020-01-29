@@ -6,7 +6,7 @@
 
 ## Assumptions
 
-- Only Chrome needs to be supported
+- Only latest version of Chrome needs to be supported
 
 ## Task
 
