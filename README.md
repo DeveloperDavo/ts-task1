@@ -7,6 +7,7 @@
 ## Assumptions
 
 - Only latest version of Chrome needs to be supported
+- Keep toggle on refresh
 
 ## Task
 
