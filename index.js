@@ -1,17 +1,21 @@
-let toggleHighlightStartingFromRow1 = false
 const ulId = 'ulId'
 
-function render(reviews) {
+function toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li) {
+  if ((i + (toggleHighlightStartingFromRow1 ? 0 : 1)) % 2 == 0) {
+    li.classList.add('highlight')
+  }
+}
+
+function render(reviews, toggleHighlightStartingFromRow1) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
   ul.setAttribute('id', ulId)
   reviews.map(({ markDescription, comment, creationDate }, i) => {
     const li = document.createElement('li')
-    if ((i + (toggleHighlightStartingFromRow1 ? 1 : 0)) % 2 != 0)
-      li.classList.add('highlight')
     const text = document.createTextNode(
       `${markDescription} ${comment} ${creationDate}`
     )
+    toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li)
     li.appendChild(text)
     ul.appendChild(li)
   })
@@ -31,14 +35,15 @@ function getReviews() {
 }
 
 window.addEventListener('load', () => {
+  let toggleHighlightStartingFromRow1 = false
   getReviews().then(reviews => {
-    render(reviews)
+    render(reviews, toggleHighlightStartingFromRow1)
     document
       .querySelector('#highlight-toggle')
       .addEventListener('change', () => {
         toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
         document.querySelector('#' + ulId).remove()
-        render(reviews)
+        render(reviews, toggleHighlightStartingFromRow1)
       })
   })
 })
