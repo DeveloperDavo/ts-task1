@@ -24,9 +24,10 @@ function render(reviews, toggleHighlightStartingFromRow1) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
   ul.setAttribute('id', ulId)
-  reviews.map((review, i) => {
-    ul.appendChild(createLi(review, toggleHighlightStartingFromRow1, i))
+  const listItems = reviews.map((review, i) => {
+    return createLi(review, toggleHighlightStartingFromRow1, i)
   })
+  listItems.forEach(li => ul.append(li))
   body.appendChild(ul)
 }
 
