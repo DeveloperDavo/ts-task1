@@ -1,4 +1,4 @@
-function render({ tsId, reviews }) {
+function render({ reviews }) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
   reviews.map(({ markDescription, comment, creationDate }) => {
