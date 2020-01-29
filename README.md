@@ -6,7 +6,7 @@
 
 ## Assumptions
 
-- Works in Chrome
+- Only Chrome needs to be supported
 
 ## Task
 
@@ -20,11 +20,12 @@
 
 1. Add a background color to every second row
 1. Add a button that toggles the background color
-1. Every second row, including row 2
-1. Every second row, including row 1
+   1. Every second row, including row 2
+   1. Every second row, including row 1
 1. Add a button to refresh the list
 
 ### Additional requirements
 
 - Tests are not necessary.
 - Use JS
+- Spend 3-4 hours on Tasks 1 to 4
