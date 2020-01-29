@@ -48,9 +48,9 @@ function rerender(reviews, toggleHighlightStartingFromRow1) {
   render(reviews, toggleHighlightStartingFromRow1)
 }
 
-function run() {
-  let toggleHighlightStartingFromRow1 = false
+window.addEventListener('load', () => {
   getReviews().then(reviews => {
+    let toggleHighlightStartingFromRow1 = false
     const state = { reviews }
     render(state.reviews, toggleHighlightStartingFromRow1)
     document
@@ -66,8 +66,4 @@ function run() {
       })
     })
   })
-}
-
-window.addEventListener('load', () => {
-  run()
 })
