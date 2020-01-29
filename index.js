@@ -51,18 +51,19 @@ function rerender(reviews, toggleHighlightStartingFromRow1) {
 function run() {
   let toggleHighlightStartingFromRow1 = false
   getReviews().then(reviews => {
-    render(reviews, toggleHighlightStartingFromRow1)
+    const state = { reviews }
+    render(state.reviews, toggleHighlightStartingFromRow1)
     document
       .querySelector('#highlight-toggle')
       .addEventListener('change', () => {
         toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
-        rerender(reviews, toggleHighlightStartingFromRow1)
+        rerender(state.reviews, toggleHighlightStartingFromRow1)
       })
-  })
-
-  document.querySelector('#refresh-button').addEventListener('click', () => {
-    getReviews().then(reviews => {
-      rerender(reviews, toggleHighlightStartingFromRow1)
+    document.querySelector('#refresh-button').addEventListener('click', () => {
+      getReviews().then(reviews => {
+        state.reviews = reviews
+        rerender(state.reviews, toggleHighlightStartingFromRow1)
+      })
     })
   })
 }
