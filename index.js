@@ -6,18 +6,26 @@ function toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li) {
   }
 }
 
+function createLi(
+  { markDescription, comment, creationDate },
+  toggleHighlightStartingFromRow1,
+  i
+) {
+  const li = document.createElement('li')
+  const text = document.createTextNode(
+    `${markDescription} ${comment} ${creationDate}`
+  )
+  toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li)
+  li.appendChild(text)
+  return li
+}
+
 function render(reviews, toggleHighlightStartingFromRow1) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
   ul.setAttribute('id', ulId)
-  reviews.map(({ markDescription, comment, creationDate }, i) => {
-    const li = document.createElement('li')
-    const text = document.createTextNode(
-      `${markDescription} ${comment} ${creationDate}`
-    )
-    toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li)
-    li.appendChild(text)
-    ul.appendChild(li)
+  reviews.map((review, i) => {
+    ul.appendChild(createLi(review, toggleHighlightStartingFromRow1, i))
   })
   body.appendChild(ul)
 }
