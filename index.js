@@ -43,6 +43,11 @@ function getReviews() {
     })
 }
 
+function rerender(reviews, toggleHighlightStartingFromRow1) {
+  document.querySelector('#' + UL_ID).remove()
+  render(reviews, toggleHighlightStartingFromRow1)
+}
+
 function run() {
   let toggleHighlightStartingFromRow1 = false
   getReviews().then(reviews => {
@@ -51,14 +56,13 @@ function run() {
       .querySelector('#highlight-toggle')
       .addEventListener('change', () => {
         toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
-        document.querySelector('#' + UL_ID).remove()
-        render(reviews, toggleHighlightStartingFromRow1)
+        rerender(reviews, toggleHighlightStartingFromRow1)
       })
-    document.querySelector('#refresh-button').addEventListener('click', () => {
-      getReviews().then(reviews => {
-        document.querySelector('#' + UL_ID).remove()
-        render(reviews, toggleHighlightStartingFromRow1)
-      })
+  })
+
+  document.querySelector('#refresh-button').addEventListener('click', () => {
+    getReviews().then(reviews => {
+      rerender(reviews, toggleHighlightStartingFromRow1)
     })
   })
 }
