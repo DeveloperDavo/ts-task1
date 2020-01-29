@@ -1,7 +1,7 @@
 let toggleHighlightStartingFromRow1 = false
 const ulId = 'ulId'
 
-function render({ reviews }) {
+function render(reviews) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
   ul.setAttribute('id', ulId)
@@ -18,21 +18,24 @@ function render({ reviews }) {
   body.appendChild(ul)
 }
 
-function reviews() {
-  fetch(
+function getReviews() {
+  return fetch(
     'https://api-qa.trustedshops.com/rest/internal/v2/shops/X6A4AACCD2C75E430381B2E1C4CLASSIC/reviews.json'
   )
     .then(response => {
       return response.json()
     })
     .then(json => {
-      render(json.response.data.shop)
+      return json.response.data.shop.reviews
     })
 }
 
-reviews()
 document.querySelector('#highlight-toggle').addEventListener('change', () => {
   toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
   document.querySelector('#' + ulId).remove()
-  reviews()
+  getReviews()
+})
+
+window.addEventListener('load', () => {
+  getReviews().then(reviews => render(reviews))
 })
