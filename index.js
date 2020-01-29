@@ -1,4 +1,4 @@
-const ulId = 'ulId'
+const UL_ID = 'ulId'
 
 function toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li) {
   if ((i + (toggleHighlightStartingFromRow1 ? 0 : 1)) % 2 == 0) {
@@ -23,7 +23,7 @@ function createLi(
 function render(reviews, toggleHighlightStartingFromRow1) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
-  ul.setAttribute('id', ulId)
+  ul.setAttribute('id', UL_ID)
   const listItems = reviews.map((review, i) => {
     return createLi(review, toggleHighlightStartingFromRow1, i)
   })
@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
       .querySelector('#highlight-toggle')
       .addEventListener('change', () => {
         toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
-        document.querySelector('#' + ulId).remove()
+        document.querySelector('#' + UL_ID).remove()
         render(reviews, toggleHighlightStartingFromRow1)
       })
   })
