@@ -1,8 +1,9 @@
 function render({ reviews }) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
-  reviews.map(({ markDescription, comment, creationDate }) => {
+  reviews.map(({ markDescription, comment, creationDate }, i) => {
     const li = document.createElement('li')
+    if (i % 2 != 0) li.classList.add('highlight')
     const text = document.createTextNode(
       `${markDescription} ${comment} ${creationDate}`
     )

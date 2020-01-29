@@ -1,0 +1,7 @@
+:root {
+  --primary-color: #ffdc0f;
+}
+
+.highlight {
+  background-color: var(--primary-color);
+}
