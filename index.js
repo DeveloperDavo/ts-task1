@@ -1,9 +1,14 @@
+let toggleHighlightStartingFromRow1 = false
+const ulId = 'ulId'
+
 function render({ reviews }) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
+  ul.setAttribute('id', ulId)
   reviews.map(({ markDescription, comment, creationDate }, i) => {
     const li = document.createElement('li')
-    if (i % 2 != 0) li.classList.add('highlight')
+    if ((i + (toggleHighlightStartingFromRow1 ? 1 : 0)) % 2 != 0)
+      li.classList.add('highlight')
     const text = document.createTextNode(
       `${markDescription} ${comment} ${creationDate}`
     )
@@ -26,3 +31,8 @@ function reviews() {
 }
 
 reviews()
+document.querySelector('#highlight-toggle').addEventListener('change', () => {
+  toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
+  document.querySelector('#' + ulId).remove()
+  reviews()
+})

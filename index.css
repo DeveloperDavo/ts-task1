@@ -1,7 +1,8 @@
 :root {
-  --primary-color: #ffdc0f;
+  --yellow: #ffdc0f;
+  --blue: #0dbedc;
 }
 
 .highlight {
-  background-color: var(--primary-color);
+  background-color: var(--yellow);
 }
