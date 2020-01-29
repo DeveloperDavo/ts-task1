@@ -30,12 +30,15 @@ function getReviews() {
     })
 }
 
-document.querySelector('#highlight-toggle').addEventListener('change', () => {
-  toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
-  document.querySelector('#' + ulId).remove()
-  getReviews()
-})
-
 window.addEventListener('load', () => {
-  getReviews().then(reviews => render(reviews))
+  getReviews().then(reviews => {
+    render(reviews)
+    document
+      .querySelector('#highlight-toggle')
+      .addEventListener('change', () => {
+        toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
+        document.querySelector('#' + ulId).remove()
+        render(reviews)
+      })
+  })
 })
