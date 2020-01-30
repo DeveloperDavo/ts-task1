@@ -1,7 +1,7 @@
 const UL_ID = 'ulId'
 
 function toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li) {
-  if ((i + (toggleHighlightStartingFromRow1 ? 0 : 1)) % 2 == 0) {
+  if ((i + (toggleHighlightStartingFromRow1 ? 0 : 1)) % 2 === 0) {
     li.classList.add('highlight')
   }
 }
