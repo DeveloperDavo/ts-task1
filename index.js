@@ -1,31 +1,27 @@
 const UL_ID = 'ulId'
 
-function toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li) {
-  if ((i + (toggleHighlightStartingFromRow1 ? 0 : 1)) % 2 === 0) {
+function toggleHighlight(toggleFirst, i, li) {
+  if ((i + (toggleFirst ? 0 : 1)) % 2 === 0) {
     li.classList.add('highlight')
   }
 }
 
-function createLi(
-  { markDescription, comment, creationDate },
-  toggleHighlightStartingFromRow1,
-  i
-) {
+function createLi({ markDescription, comment, creationDate }, toggleFirst, i) {
   const li = document.createElement('li')
   const text = document.createTextNode(
     `${markDescription} ${comment} ${creationDate}`
   )
-  toggleHighlightStartingRow(toggleHighlightStartingFromRow1, i, li)
+  toggleHighlight(toggleFirst, i, li)
   li.appendChild(text)
   return li
 }
 
-function render(reviews, toggleHighlightStartingFromRow1) {
+function render(reviews, toggleFirst) {
   const body = document.querySelector('body')
   const ul = document.createElement('ul')
   ul.setAttribute('id', UL_ID)
   const listItems = reviews.map((review, i) => {
-    return createLi(review, toggleHighlightStartingFromRow1, i)
+    return createLi(review, toggleFirst, i)
   })
   listItems.forEach(li => ul.append(li))
   body.appendChild(ul)
@@ -43,26 +39,26 @@ function getReviews() {
     })
 }
 
-function rerender(reviews, toggleHighlightStartingFromRow1) {
+function rerender(reviews, toggleFirst) {
   document.querySelector('#' + UL_ID).remove()
-  render(reviews, toggleHighlightStartingFromRow1)
+  render(reviews, toggleFirst)
 }
 
 window.addEventListener('load', () => {
   getReviews().then(reviews => {
-    let toggleHighlightStartingFromRow1 = false
+    let toggleFirst = false
     const state = { reviews }
-    render(state.reviews, toggleHighlightStartingFromRow1)
+    render(state.reviews, toggleFirst)
     document
       .querySelector('#highlight-toggle')
       .addEventListener('change', () => {
-        toggleHighlightStartingFromRow1 = !toggleHighlightStartingFromRow1
-        rerender(state.reviews, toggleHighlightStartingFromRow1)
+        toggleFirst = !toggleFirst
+        rerender(state.reviews, toggleFirst)
       })
     document.querySelector('#refresh-button').addEventListener('click', () => {
       getReviews().then(reviews => {
         state.reviews = reviews
-        rerender(state.reviews, toggleHighlightStartingFromRow1)
+        rerender(state.reviews, toggleFirst)
       })
     })
   })
