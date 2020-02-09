@@ -9,6 +9,11 @@
 - Only latest version of Chrome needs to be supported
 - Keep toggle on refresh
 
+## Out of scope
+
+- Error handling
+- Loading...
+
 ## Task
 
 1. Call the reviews [endpoint](https://api-qa.trustedshops.com/rest/internal/v2/shops/X6A4AACCD2C75E430381B2E1C4CLASSIC/reviews.json)
